@@ -1,4 +1,5 @@
 import React from "react";
+import "./GameGrid.css";
 
 export default function GameGrid({ gridSize }) {
   const indexes = Array.from({ length: gridSize }).map((_, index) => index);
