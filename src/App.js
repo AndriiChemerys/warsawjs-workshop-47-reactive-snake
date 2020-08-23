@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import GameGrid from "./game/GameGrid";
 
 const GridSize = 10;
+let gridSize = 0;
 
 function randomIndex(n) {
   return Math.floor(Math.random() * n);
@@ -25,6 +26,15 @@ function App() {
     const interval = setInterval(() => {
       const [snakeHead] = snake;
       const newSnakeHead = { ...snakeHead };
+      const fruitEaten =
+        fruit.x === newSnakeHead.x && fruit.y === newSnakeHead.y;
+
+const increaseSpeed () => {} ;
+
+      if (fruitEaten) {
+        setFruit({ x: randomIndex(gridSize), y: randomIndex(gridSize) });
+        increaseSpeed();
+      }
 
       if (direction === "up") {
         newSnakeHead.x -= 1;
@@ -36,7 +46,10 @@ function App() {
         newSnakeHead.y -= 1;
       }
 
-      const newSnake = [newSnakeHead, ...snake.slice(0, snake.length - 1)];
+      const newSnake = fruitEaten
+        ? [newSnakeHead, ...snake.slice(0, snake.length)]
+        : [newSnakeHead, ...snake.slice(0, snake.length - 1)];
+
       setSnake(newSnake);
     }, speed);
     return () => {
